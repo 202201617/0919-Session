@@ -4,6 +4,7 @@ import com.likelion.lionlib.domain.Book;
 import com.likelion.lionlib.domain.Member;
 import com.likelion.lionlib.domain.Reservation;
 import com.likelion.lionlib.dto.CountReservationResponse;
+import com.likelion.lionlib.dto.ReservationCountResponse;
 import com.likelion.lionlib.dto.ReservationRequest;
 import com.likelion.lionlib.dto.ReservationResponse;
 import com.likelion.lionlib.repository.ReservationRepository;
@@ -21,8 +22,8 @@ public class ReservationService {
 
     private final GlobalService globalService;
 
-    public ReservationResponse addReservation(ReservationRequest reservationRequest) {
-        Member member = globalService.findMemberById(reservationRequest.getMemberId());
+    public ReservationResponse addReservation(Long memberId, ReservationRequest reservationRequest) {
+        Member member = globalService.findMemberById(memberId);
         Book book = globalService.findBookById(reservationRequest.getBookId());
         Reservation savedReservation = Reservation.builder()
                 .member(member)
